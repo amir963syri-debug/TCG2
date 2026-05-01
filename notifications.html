@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+       <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap" rel="stylesheet">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الإشعارات</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="notif-page">
+
+<h2 class="notif-title">الإشعارات</h2>
+
+<button class="mark-read" onclick="markAllRead()">تحديد الكل كمقروء</button>
+
+<div id="notif-list" class="notif-list"></div>
+
+<p id="empty" class="empty-text">لا يوجد إشعارات حالياً</p>
+
+<script src="notifications.js"></script>
+<script>
+    localStorage.setItem("notifCount", 0);
+</script>
+
+</body>
+</html>
