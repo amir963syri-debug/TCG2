@@ -1,40 +1,38 @@
-// التاريخ الثابت للامتحان (6 يونيو 2026)
-const examDate = new Date("2026-06-06T08:00:00");
+document.addEventListener("DOMContentLoaded", function () {
 
-// جلب العناصر من HTML
-const daysEl = document.getElementById("days");
-const hoursEl = document.getElementById("hours");
-const minutesEl = document.getElementById("minutes");
-const secondsEl = document.getElementById("seconds");
+    // تاريخ الامتحان (6 حزيران 2026 - الساعة 8 صباحاً)
+    const examDate = new Date(2026, 5, 6, 8, 0, 0);
 
-// تحديث العد التنازلي كل ثانية
-function updateCountdown() {
-    const now = new Date();
-    const diff = examDate - now;
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
 
-    // إذا الوقت انتهى
-    if (diff <= 0) {
-        daysEl.textContent = "0";
-        hoursEl.textContent = "0";
-        minutesEl.textContent = "0";
-        secondsEl.textContent = "0";
-        return;
+    function updateCountdown() {
+        const now = new Date();
+        const diff = examDate - now;
+
+        if (diff <= 0) {
+            daysEl.textContent = "0";
+            hoursEl.textContent = "00";
+            minutesEl.textContent = "00";
+            secondsEl.textContent = "00";
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        // تنسيق احترافي
+        daysEl.textContent = days;
+        hoursEl.textContent = String(hours).padStart(2, '0');
+        minutesEl.textContent = String(minutes).padStart(2, '0');
+        secondsEl.textContent = String(seconds).padStart(2, '0');
     }
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 
-    // تنسيق الأرقام: 08 - 07 - 01
-    daysEl.textContent = days;
-    hoursEl.textContent = hours < 10 ? "0" + hours : hours;
-    minutesEl.textContent = minutes < 10 ? "0" + minutes : minutes;
-    secondsEl.textContent = seconds < 10 ? "0" + seconds : seconds;
-}
-
-// تشغيل الدالة فوراً
-updateCountdown();
-
-// التحديث كل ثانية
-setInterval(updateCountdown, 1000);
+});
